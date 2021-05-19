@@ -20,11 +20,29 @@ ActiveStorage.start()
 
 // External imports
 import "bootstrap";
+import { csrfToken } from "@rails/ujs";
 
 // Internal imports, e.g:
 // import { initSelect2 } from '../components/init_select2';
 
 document.addEventListener('turbolinks:load', () => {
   // Call your functions here, e.g:
-  // initSelect2();
+  const form = document.querySelector('#new_review');
+  if (form) {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+
+      const request_params = {
+        method: 'POST',
+        headers: { 'Accept': "application/json", 'X-CSRF-Token': csrfToken() },
+        body: new FormData(form)
+      }
+      fetch(form.action, request_params)
+        .then(response => response.json())
+        .then(data => {
+          const reviews = document.querySelector('#reviews');
+          reviews.insertAdjacentHTML('beforeend', data.review);
+        });
+    })
+  }
 });
