@@ -13,7 +13,4 @@
   <% end %>
 </div>
 
-<%= simple_form_for([ @restaurant, @review ], remote: false) do |f| %>
-  <%= f.input :content, as: :text %>
-  <%= f.button :submit %>
-<% end %>
+<%= render 'reviews/form', restaurant: @restaurant, review: @review %>

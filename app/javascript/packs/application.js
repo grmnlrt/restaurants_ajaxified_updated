@@ -42,6 +42,7 @@ document.addEventListener('turbolinks:load', () => {
         .then(data => {
           const reviews = document.querySelector('#reviews');
           reviews.insertAdjacentHTML('beforeend', data.review);
+          form.outerHTML = data.form;
         });
     })
   }

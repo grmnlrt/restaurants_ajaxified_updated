@@ -15,7 +15,8 @@ class ReviewsController < ApplicationController
       format.json do
         @review.save
         render json: {
-          review: render_to_string(partial: 'restaurants/review.html', locals: { review: @review })
+          review: render_to_string(partial: 'restaurants/review.html', locals: { review: @review }),
+          form: render_to_string(partial: 'reviews/form.html', locals: { restaurant: @restaurant, review: Review.new })
         }
       end
     end
